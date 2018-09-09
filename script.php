@@ -9,11 +9,31 @@
 <body>
 <?php
 
+$start = '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>';
+
+$end = '    
+</body>
+</html>';
+
 $code = $_POST['code'];
 echo $code;
 
+$function = 'function parseJson(){
+    $str = file_get_contents("https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22");
+    $json = json_decode($str, true);
+    $status = $json["weather"][0]["description"];
+    return $status;}';
+
 $myfile = fopen("generatedCode.php", "w") or die("Unable to open file!");
-$code = "<?php"+$code;
+$code = $start."<?php \n ".$function."\n".$code."\n ?>".$end;
 fwrite($myfile, $code);
 fclose($myfile);
 
