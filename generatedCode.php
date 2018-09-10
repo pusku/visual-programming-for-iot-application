@@ -12,24 +12,29 @@
     $json = json_decode($str, true);
     $status = $json["weather"][0]["description"];
     return $status;}
-function action_motor(){
+function action_motor($flag){
         $url = "http://localhost:8080/restapp/public/index.php/api/action/update/1";
         $fields=array (
             "id"=>"1",
-            "action"=>"true",
+            "action"=>$flag,
             "time"=>"2018-09-09 14:08:27"
         );
-
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($fields));
-
         $response = curl_exec($ch);
-
         return "x ".$response;
     } 
-print(action_motor());
+function get_lowersensor(){
+        $url = "http://localhost:8080/restapp/public/index.php/api/lowerlastvalue";
+        $str = file_get_contents($url);
+        $json = json_decode($str, true);
+        $status = $json[0]["data"];
+        echo $status;
+    }
+if (get_lowersensor() >= 123) {
+  action_motor('true')}
 
  ?>
 </body>
