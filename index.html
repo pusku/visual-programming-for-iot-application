@@ -7,8 +7,11 @@
   <script src="blockly/blocks_compressed.js"></script>
   <script src="blockly/php_compressed.js"></script>
   <script src="blockly/msg/js/en.js"></script>
-  <script src="codegenerator.js"></script>
-    <script src="codegenerator2.js"></script>
+  <script src="codegenerator-weather.js"></script>
+  <script src="codegenerator-motor-on.js"></script>
+  <script src="codegenerator-motor-off.js"></script>
+  <script src="codegenerator-uppersensor.js"></script>
+  <script src="codegenerator-lowersensor.js"></script>
   <script src="js/jquery.min.js"></script>
   <style>
     body {
@@ -60,11 +63,13 @@
       <block type="text_length"></block>
       <block type="text_print"></block>
     </category>
-    <category name="webapi">
+    <category name="webapi" colour="">
       <block type="weather"></block>
-      <block type="motor"></block>
+      <block type="motor-on"></block>
+      <block type="motor-off"></block>
+      <block type="l-sensor"></block>
     </category>
-
+      
   </xml>
 
 
@@ -72,29 +77,6 @@
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {media: 'blockly/media/',toolbox: document.getElementById('toolbox')});
-//weater block start
-    Blockly.Blocks['weather'] = {
-      init: function() {
-        this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel('weather api'));
-        this.setOutput(true, 'String');
-        //this.setPreviousStatement(true, 'Action');
-        this.setColour(160);
-      }
-    }
-//weather block end
-
-//motor block start
-    Blockly.Blocks['motor'] = {
-      init: function() {
-        this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel(' motor action'));
-        this.setOutput(true, 'String');
-        //this.setPreviousStatement(true, 'Action');
-        this.setColour(140);
-      }
-    }
-//motor block end
 
     function showCode() {
       // Generate JavaScript code and display it.
@@ -130,17 +112,61 @@ function post(path, params, method) {
     form.setAttribute("method", method);
     form.setAttribute("action", path);
 
-
             var hiddenField = document.createElement("input");
             hiddenField.setAttribute("type", "hidden");
             hiddenField.setAttribute("name", "code");
             hiddenField.setAttribute("value", params);
             form.appendChild(hiddenField);
 
-
     document.body.appendChild(form);
     form.submit();
 }
+
+//weater block start
+Blockly.Blocks['weather'] = {
+      init: function() {
+        this.appendDummyInput()
+        .appendField(new Blockly.FieldLabel('weather api'));
+        this.setOutput(true, 'String');
+        //this.setPreviousStatement(true, 'Action');
+        this.setColour(160);
+      }
+    }
+//weather block end
+
+//motor block start
+    Blockly.Blocks['motor-on'] = {
+      init: function() {
+        this.appendDummyInput()
+        .appendField(new Blockly.FieldLabel('motor on'));
+        //this.setOutput(true, 'String');
+        this.setPreviousStatement(true, 'Action');
+        this.setColour(60);
+      }
+    }
+
+    Blockly.Blocks['motor-off'] = {
+      init: function() {
+        this.appendDummyInput()
+        .appendField(new Blockly.FieldLabel('motor off'));
+        //this.setOutput(true, 'String');
+        this.setPreviousStatement(true, 'Action');
+        this.setColour(20);
+      }
+    }
+//motor block end
+
+//lower sensor block start
+Blockly.Blocks['l-sensor'] = {
+      init: function() {
+        this.appendDummyInput()
+        .appendField(new Blockly.FieldLabel('lower sensor'));
+        this.setOutput(true, 'Number');
+        //this.setPreviousStatement(true, 'Action');
+        this.setColour(20);
+      }
+    }
+//lower sensor block end
 
   </script>
 

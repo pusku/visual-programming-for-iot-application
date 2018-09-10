@@ -10,7 +10,7 @@
 
 //The URL that we want to send a PUT request to.
 
-fumction action_motor(){
+function action_motor(){
     $url = 'http://localhost:8080/restapp/public/index.php/api/action/update/1';
     
     $fields=array (
@@ -28,3 +28,14 @@ fumction action_motor(){
 
     return "x ".$response;
 }
+
+function get_lowersensor(){
+    $url = 'http://localhost:8080/restapp/public/index.php/api/lowerlastvalue';
+    $str = file_get_contents($url);
+    $json = json_decode($str, true);
+    $status = $json[0]['data'];
+    echo $status;
+
+}
+
+get_lowersensor();

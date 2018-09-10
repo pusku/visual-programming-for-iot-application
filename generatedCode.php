@@ -31,10 +31,12 @@ function get_lowersensor(){
         $str = file_get_contents($url);
         $json = json_decode($str, true);
         $status = $json[0]["data"];
-        echo $status;
+        $num = intval($status);
+        return $num;
     }
-if (get_lowersensor() >= 123) {
-  action_motor('true')}
+
+if (get_lowersensor() > 123) {
+  action_motor("false");}
 
  ?>
 </body>
