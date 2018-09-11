@@ -15,7 +15,8 @@ function action_motor(){
     
     $fields=array (
         "id"=>"1",
-        "action"=>"true",
+        "atag"=>"/ac0wtc23",
+        "action"=>"1",
         "time"=>"2018-09-09 14:08:27"
     );
 
@@ -26,16 +27,16 @@ function action_motor(){
 
     $response = curl_exec($ch);
 
-    return "x ".$response;
+    echo $response;
 }
 
-function get_lowersensor(){
-    $url = 'http://localhost:8080/restapp/public/index.php/api/lowerlastvalue';
-    $str = file_get_contents($url);
-    $json = json_decode($str, true);
-    $status = $json[0]['data'];
-    echo $status;
+// function get_lowersensor(){
+//     $url = 'http://localhost:8080/restapp/public/index.php/api/lowerlastvalue';
+//     $str = file_get_contents($url);
+//     $json = json_decode($str, true);
+//     $status = $json[0]['data'];
+//     echo $status;
 
-}
+// }
 
-get_lowersensor();
+action_motor();

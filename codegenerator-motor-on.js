@@ -1,6 +1,6 @@
 
 Blockly.PHP['motor-on'] = function(Block) {
-    var code = 'action_motor("true");';
+    var code = 'action_motor("1");';
     //return [code, Blockly.PHP.ORDER_ATOMIC];
     return code;
   }
