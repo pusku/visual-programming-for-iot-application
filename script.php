@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Code execution</title>
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
+
 <?php
 
+//creating the basic structure of a html page
 $start = '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +21,16 @@ $start = '<!DOCTYPE html>
     <title>Document</title>
 </head>
 <body>';
-
 $end = '
 </body>
 </html>';
 
-$code = $_POST['code'];
-echo $code;
 
+//recive the code from blockly
+$code = $_POST['code'];
+//echo $code;
+
+// fuction declaration for consuming rest apis
 $function = 'function parseJson(){
     $str = file_get_contents("https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22");
     $json = json_decode($str, true);
@@ -53,12 +58,19 @@ $function = 'function parseJson(){
         return $status;
     }';
 
-
+    
+//open or create if dosent exist 
 $myfile = fopen("generatedCode.php", "w") or die("Unable to open file!");
+//rearrange the codes 
 $code = $start."<?php \n ".$function."\n".$code."\n ?>".$end;
+//write codein to the file
 fwrite($myfile, $code);
+//close the file
 fclose($myfile);
 
+?>
+
+<?php
 ///////////////////////////
 // Testing area
 
@@ -81,8 +93,30 @@ fclose($myfile);
 // $weather = $weather_data["weather"][0]["description"];
 
 // echo "<h1>Weather : ".$weather."</h1>";
-
-
 ?>
+<script>
+    $( document ).ready(function() {
+       post("generatedCode.php","code");
+    });
+
+    function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "code");
+            hiddenField.setAttribute("value", params);
+            form.appendChild(hiddenField);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
 </body>
 </html>

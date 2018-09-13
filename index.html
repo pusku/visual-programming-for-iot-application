@@ -29,6 +29,7 @@
   <p>
     <button onclick="showCode()">Show PHP</button>
     <button onclick="runCode()">Run PHP</button>
+    <button onclick="showXml()">Generate XML tree</button>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 800px;"></div>
@@ -121,6 +122,14 @@ function post(path, params, method) {
     document.body.appendChild(form);
     form.submit();
 }
+
+
+    function showXml() {
+      var xmlDom = Blockly.Xml.workspaceToDom(demoWorkspace);
+      var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+      //alert(xmlText);
+      post("xmlTree.php",xmlText);
+    }
 
 //weater block start
 Blockly.Blocks['weather'] = {

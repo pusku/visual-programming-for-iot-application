@@ -33,8 +33,9 @@ function get_lowersensor(){
         $status = $json[0]["data"];
         return $status;
     }
-if (get_lowersensor() >= 123) {
-  action_motor("0");}
+if (true) {
+  print('SHUVO');
+}
 
  ?>
 </body>
