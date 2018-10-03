@@ -33,8 +33,8 @@ function get_lowersensor(){
         $status = $json[0]["data"];
         return $status;
     }
-if (true) {
-  print('SHUVO');
+if (parseJson() == 'light intensity drizzle') {
+  print('xxxxxxxxxxxxx');
 }
 
  ?>

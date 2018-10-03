@@ -1,0 +1,39 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+    <variables></variables>
+    <block type="controls_if" id="Z+)TIh.!`.`$-YM;v*Z9" x="-58" y="68">
+        <value name="IF0">
+            <block type="logic_operation" id="t]Z^~xJSaaz5/ReVxoh8">
+                <field name="OP">AND</field>
+                <value name="A">
+                    <block type="logic_compare" id="i+.5S#AS4nO7]7C]SJ*{">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                            <block type="weather" id="`JiG{oSkV5+R:F/A5cTi"></block>
+                        </value>
+                        <value name="B">
+                            <block type="text" id="Ys(4%6/%R6=xU_nPE8{g">
+                                <field name="TEXT">light intensity drizzle</field>
+                            </block>
+                        </value>
+                    </block>
+                </value>
+                <value name="B">
+                    <block type="logic_compare" id="bC#|CT05TXl)1$$O$JhB">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                            <block type="l-sensor" id="Tk=]6]@qBCLzmJuJSRFo"></block>
+                        </value>
+                        <value name="B">
+                            <block type="math_number" id="q$iM.bEIA-$^1{ZB)?UR">
+                                <field name="NUM">123</field>
+                            </block>
+                        </value>
+                    </block>
+                </value>
+            </block>
+        </value>
+        <statement name="DO0">
+            <block type="motor-on" id="Sr1Xd;mbe!;F+mifjO{N"></block>
+        </statement>
+    </block>
+</xml>
